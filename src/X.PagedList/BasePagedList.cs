@@ -107,8 +107,7 @@ public abstract class BasePagedList<T> : IPagedList<T>
 
         if (totalItemCount < 0)
         {
-            throw new ArgumentOutOfRangeException(
-                $"totalItemCount = {totalItemCount}. TotalItemCount cannot be less than 0.");
+            throw new ArgumentOutOfRangeException($"totalItemCount = {totalItemCount}. TotalItemCount cannot be less than 0.");
         }
 
         // set source to blank list if superset is null to prevent exceptions
@@ -172,5 +171,5 @@ public abstract class BasePagedList<T> : IPagedList<T>
     ///</summary>
     ///<returns>A non-enumerable copy of this paged list.</returns>
     [Obsolete("This method will be removed in future versions")]
-    public PagedListMetaData GetMetaData() => new(this);
+    public IPagedList GetMetaData() => new StaticPagedList<T>(new List<T>(), this);
 }
